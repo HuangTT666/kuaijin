@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>幸福之家 - 我们的家庭回忆</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 头部导航 -->
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-home"></i>
+                <h1>幸福之家</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">首页</a></li>
+                    <li><a href="#family">家庭成员</a></li>
+                    <li><a href="#photos">照片回忆</a></li>
+                    <li><a href="#videos">家庭视频</a></li>
+                    <li><a href="#location">家乡</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 英雄区域 -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>珍藏每一刻家庭回忆</h2>
+            <p>记录一家六口的幸福时光，珍藏美好瞬间</p>
+            <a href="#family" class="btn">认识我们一家人</a>
+        </div>
+    </section>
+
+    <!-- 家庭成员 -->
+    <section class="section" id="family">
+        <div class="section-title">
+            <h2>家庭成员</h2>
+        </div>
+        <div class="family-members">
+            <!-- 成员1 -->
+            <div class="member-card">
+                <div class="member-img">
+                    <img src="./img/爸爸大头照.png" alt="爸爸">
+                </div>
+                <div class="member-info">
+                    <h3>黄金快</h3>
+                    <span class="role">爸爸</span>
+                    <p>家庭顶梁柱，最伟大的爸爸。</p>
+                </div>
+            </div>
+            
+            <!-- 成员2 -->
+            <div class="member-card">
+                <div class="member-img">
+                    <img src="./img/妈妈大头照.png" alt="妈妈">
+                </div>
+                <div class="member-info">
+                    <h3>潘光影</h3>
+                    <span class="role">妈妈</span>
+                    <p>温柔贤惠，家庭美食家，擅长制作各种美味佳肴，最伟大的妈妈。</p>
+                </div>
+            </div>
+            
+            <!-- 成员3 -->
+            <div class="member-card">
+                <div class="member-img">
+                    <img src="./img/黄美漂大头照.png" alt="姐姐">
+                </div>
+                <div class="member-info">
+                    <h3>黄美漂</h3>
+                    <span class="role">姐姐</span>
+                    <p>社会职工，热爱绘画。</p>
+                </div>
+            </div>
+            
+            <!-- 成员4 -->
+            <div class="member-card">
+                <div class="member-img">
+                    <img src="./img/黄周祥大头照.jpg" alt="哥哥">
+                </div>
+                <div class="member-info">
+                    <h3>黄周祥</h3>
+                    <span class="role">哥哥</span>
+                    <p>在读大学，家庭网站制作人。</p>
+                </div>
+            </div>
+            
+            <!-- 成员5 -->
+            <div class="member-card">
+                <div class="member-img">
+                    <img src="./img/黄慧英大头照.png" alt="妹妹">
+                </div>
+                <div class="member-info">
+                    <h3>黄慧英</h3>
+                    <span class="role">妹妹</span>
+                    <p>在读大学，活泼可爱，热爱跳舞。</p>
+                </div>
+            </div>
+            
+            <!-- 成员6 -->
+            <div class="member-card">
+                <div class="member-img">
+                    <img src="./img/黄王祥大头照.png" alt="弟弟">
+                </div>
+                <div class="member-info">
+                    <h3>黄王祥</h3>
+                    <span class="role">弟弟</span>
+                    <p>在读大学，热爱篮球，彩虹球馆球星。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 轮播图 -->
+    <section class="section">
+        <div class="section-title">
+            <h2>家庭相册</h2>
+        </div>
+        <div class="carousel-container">
+            <div class="carousel">
+                <div class="carousel-item">
+                    <img src="./img/家庭精选1.jpg" alt="家庭精选">
+                </div>
+                <div class="carousel-item">
+                    <img src="./img/家庭精选2.png" alt="家庭精选">
+                </div>
+                <div class="carousel-item">
+                    <img src="./img/家庭精选3.jpg" alt="家庭精选">
+                </div>
+            </div>
+            <button class="carousel-btn prev"><i class="fas fa-chevron-left"></i></button>
+            <button class="carousel-btn next"><i class="fas fa-chevron-right"></i></button>
+            <div class="carousel-nav">
+                <div class="carousel-dot active"></div>
+                <div class="carousel-dot"></div>
+                <div class="carousel-dot"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 过往照片 -->
+    <section class="section" id="photos">
+        <div class="section-title">
+            <h2>精彩瞬间</h2>
+        </div>
+        <div class="photos-grid">
+            <div class="photo-item">
+                <img src="./img/游泳1.png" alt="家庭旅行">
+                <div class="photo-overlay">
+                    <h3>覃塘龙泉水上世界</h3>
+                    <p>2017年8月</p>
+                </div>
+            </div>
+            <div class="photo-item">
+                <img src="./img/姐妹1.png" alt="家庭旅行">
+                <div class="photo-overlay">
+                    <h3>姐妹自拍</h3>
+                    <p>2017年8月</p>
+                </div>
+            </div>
+            <div class="photo-item">
+                <img src="./img/游泳3.png" alt="家庭旅行">
+                <div class="photo-overlay">
+                    <h3>覃塘龙泉水上世界</h3>
+                    <p>2017年8月</p>
+                </div>
+            </div>
+            <div class="photo-item">
+                <img src="./img/农忙1.png" alt="家庭活动">
+                <div class="photo-overlay">
+                    <h3>农忙大丰收</h3>
+                    <p>2017年8月</p>
+                </div>
+            </div>
+            <div class="photo-item">
+                <img src="./img/农忙2.png" alt="家庭活动">
+                <div class="photo-overlay">
+                    <h3>农忙大丰收</h3>
+                    <p>2017年8月</p>
+                </div>
+            </div>
+            <div class="photo-item">
+                <img src="./img/游泳4.png" alt="家庭活动">
+                <div class="photo-overlay">
+                    <h3>覃塘龙泉水上世界</h3>
+                    <p>2017年8月</p>
+                </div>
+            </div>
+            <div class="photo-item">
+                <img src="./img/姐妹4.jpg" alt="家庭活动">
+                <div class="photo-overlay">
+                    <h3>姐妹自拍</h3>
+                    <p>2017年8月</p>
+                </div>
+            </div>
+            <div class="photo-item">
+                <img src="./img/姐妹6.jpg" alt="家庭活动">
+                <div class="photo-overlay">
+                    <h3>姐妹自拍</h3>
+                    <p>2017年8月</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 过往视频 -->
+    <!-- 修改视频卡片部分 -->
+<section class="section" id="videos">
+    <div class="section-title">
+        <h2>家庭视频</h2>
+    </div>
+    <div class="videos-container three-column">  <!-- 添加 three-column 类 -->
+        <div class="video-card">
+            <div class="video-player">
+                <video controls poster="./img/姐妹1.png">
+                    <source src="./video/姐妹 (2).mp4" type="video/mp4">
+                    您的浏览器不支持视频标签。
+                </video>
+            </div>
+            <div class="video-info">
+                <h3>2017年姐妹自拍</h3>
+                <p><i class="far fa-calendar"></i> 2017年8月</p>
+                <p><i class="fas fa-clock"></i> 1分钟</p>
+            </div>
+        </div>
+        
+        <div class="video-card">
+            <div class="video-player">
+                <video controls poster="./img/农忙1.png">
+                    <source src="./video/农忙 (2).mp4" type="video/mp4">
+                    您的浏览器不支持视频标签。
+                </video>
+            </div>
+            <div class="video-info">
+                <h3>2017年农忙大丰收</h3>
+                <p><i class="far fa-calendar"></i> 2017年8月</p>
+                <p><i class="fas fa-clock"></i> 1分钟</p>
+            </div>
+        </div>
+        
+        <div class="video-card">
+            <div class="video-player">
+                <video controls poster="./img/游泳1.png">
+                    <source src="./video/游泳 (2).mp4" type="video/mp4">
+                    您的浏览器不支持视频标签。
+                </video>
+            </div>
+            <div class="video-info">
+                <h3>2017年覃塘龙泉水上世界</h3>
+                <p><i class="far fa-calendar"></i> 2017年8月</p>
+                <p><i class="fas fa-clock"></i> 1分钟</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- 修改地理位置部分 -->
+<section class="section" id="location">
+    <div class="section-title">
+        <h2>我们的家乡</h2>
+    </div>
+    <div class="location">
+        <h2>中国广西贵港</h2>
+        <p>我们一家生活在美丽的荷城——贵港。贵港位于广西东南部，是一座历史悠久、风景秀丽的城市。这里四季如春，荷塘遍布，是我们家庭美好回忆的所在地。</p>
+        
+        <!-- 替换地图为背景图片 -->
+        <div class="location-bg">
+            <div class="location-content">
+                <h3>贵港美景</h3>
+                <p>荷城风光无限好</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <i class="fas fa-home"></i>
+            </div>
+            <p>珍藏家庭每一刻，记录成长每一步</p>
+            
+            <div class="footer-links">
+                <a href="#">首页</a>
+                <a href="#family">家庭成员</a>
+                <a href="#photos">照片回忆</a>
+                <a href="#videos">家庭视频</a>
+                <a href="#location">家乡</a>
+            </div>
+            
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-weixin"></i></a>
+                <a href="#"><i class="fab fa-qq"></i></a>
+                <a href="#"><i class="fab fa-weibo"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 幸福之家 | 中国广西贵港 | 家庭回忆珍藏网站</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 外部JavaScript文件 -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
