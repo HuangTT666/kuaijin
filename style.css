@@ -420,42 +420,6 @@ nav a:hover, nav a.active {
     }
 }
 
-@media (max-width: 992px) {
-    .videos-container.three-column {
-        flex-direction: column;
-        align-items: center;
-    }
-    .video-card {
-        width: 80%;
-        max-width: 500px;
-        height: auto;
-    }
-    .video-player {
-        height: 65vh;
-    }
-}
-
-@media (max-width: 768px) {
-    .video-card {
-        width: 90%;
-    }
-    .video-player {
-        height: 55vh;
-    }
-}
-
-@media (max-width: 576px) {
-    .video-card {
-        width: 100%;
-    }
-    .video-player {
-        height: 50vh;
-    }
-    .video-info h3 {
-        font-size: 1.5rem;
-    }
-}
-
 /* 添加新的家乡背景样式 */
 .location-bg {
     height: 400px;
@@ -566,7 +530,12 @@ footer {
     font-size: 0.9rem;
 }
 
+/* ============================== */
+/* 手机端适配 - 仅通过媒体查询实现 */
+/* ============================== */
+
 @media (max-width: 992px) {
+    /* 平板适配 */
     .hero h2 {
         font-size: 2.8rem;
     }
@@ -581,15 +550,29 @@ footer {
 }
 
 @media (max-width: 768px) {
+    /* 小平板和手机适配 */
+    
+    /* 头部导航 */
     .header-content {
         flex-direction: column;
-        gap: 15px;
+        padding: 15px 0;
     }
     
     nav ul {
-        gap: 15px;
         flex-wrap: wrap;
         justify-content: center;
+        margin-top: 15px;
+        gap: 10px;
+    }
+    
+    nav a {
+        font-size: 0.95rem;
+        padding: 6px 12px;
+    }
+    
+    /* 英雄区域 */
+    .hero {
+        height: 60vh;
     }
     
     .hero h2 {
@@ -600,46 +583,112 @@ footer {
         font-size: 1.1rem;
     }
     
-    .section {
-        padding: 60px 5%;
-    }
-    
     .carousel-item img {
-        height: 300px;
-    }
-    
-    .map-container {
         height: 300px;
     }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 480px) {
+    /* 手机适配 */
+    
+    /* 头部 */
     .logo h1 {
         font-size: 1.5rem;
     }
     
-    nav a {
-        font-size: 0.95rem;
-        padding: 5px 10px;
+    .logo i {
+        font-size: 2rem;
     }
     
+    /* 英雄区域 */
     .hero {
-        height: 70vh;
+        height: 50vh;
     }
     
     .hero h2 {
-        font-size: 2rem;
+        font-size: 1.8rem;
+    }
+    
+    /* 内容区域 */
+    .section {
+        padding: 50px 5%;
     }
     
     .section-title h2 {
-        font-size: 2rem;
+        font-size: 1.8rem;
     }
     
+    /* 家庭成员 - 保持网格布局但单列显示 */
+    .family-members {
+        grid-template-columns: 1fr;
+    }
+    
+    /* 轮播图 */
     .carousel-item img {
         height: 250px;
     }
     
-    .videos-container {
-        grid-template-columns: 1fr;
+    /* 照片网格 */
+    .photos-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .photo-item {
+        height: 180px;
+    }
+    
+    /* 视频区域 */
+    .videos-container.three-column {
+        flex-direction: column;
+    }
+    
+    .video-card {
+        width: 100%;
+        height: auto;
+    }
+    
+    .video-player {
+        height: 300px;
+    }
+    
+    .video-info {
+        height: auto;
+    }
+    
+    .video-info h3 {
+        font-size: 1.4rem;
+    }
+    
+    /* 家乡区域 */
+    .location-bg {
+        height: 300px;
+    }
+    
+    .location-content h2 {
+        font-size: 1.8rem;
+    }
+    
+    .location-content p {
+        font-size: 1.2rem;
+    }
+    
+    /* 页脚 */
+    .footer-links {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+    
+    .footer-logo {
+        font-size: 2rem;
+    }
+    
+    .social-icons a {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    
+    .copyright {
+        font-size: 0.8rem;
     }
 }
