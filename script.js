@@ -148,16 +148,23 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
         
-        // 为视频本身添加点击播放/暂停
-        videos.forEach(video => {
-            video.addEventListener('click', function() {
-                const btn = document.querySelector(`.play-pause-btn[data-video="${this.id}"]`);
-                if (btn) {
-                    togglePlayPause(this, btn);
+        // 为视频本身添加点击播放/暂停（通过覆盖层代理）
+        const videoPlayers = document.querySelectorAll('.video-player');
+        videoPlayers.forEach(player => {
+            player.addEventListener('click', function(e) {
+                // 检查是否点击了自定义控件
+                if (e.target.closest('.custom-video-controls')) return;
+                
+                const video = this.querySelector('video');
+                const btn = this.querySelector('.play-pause-btn');
+                if (video && btn) {
+                    togglePlayPause(video, btn);
                 }
             });
-            
-            // 视频结束时更新按钮状态
+        });
+        
+        // 视频结束时更新按钮状态
+        videos.forEach(video => {
             video.addEventListener('ended', function() {
                 const btn = document.querySelector(`.play-pause-btn[data-video="${this.id}"]`);
                 if (btn) {
@@ -294,6 +301,42 @@ document.addEventListener('click', function playOnInteraction() {
     }
     // 只需要一次交互即可，移除事件监听
     document.removeEventListener('click', playOnInteraction);
+});
+
+// 触摸事件拦截（防止长按下载）
+let touchStartTime = 0;
+const touchThreshold = 500; // 长按阈值（毫秒）
+
+// 记录触摸开始时间
+document.addEventListener('touchstart', function(e) {
+    touchStartTime = new Date().getTime();
+}, { passive: false });
+
+// 清除触摸时间
+document.addEventListener('touchend', function(e) {
+    touchStartTime = 0;
+}, { passive: false });
+
+// 阻止长按事件
+document.addEventListener('touchmove', function(e) {
+    if (touchStartTime && (new Date().getTime() - touchStartTime) > touchThreshold) {
+        e.preventDefault();
+    }
+}, { passive: false });
+
+// 阻止触摸相关默认行为
+const mediaContainers = document.querySelectorAll('.img-container, .video-player, .location-bg, .photo-item');
+mediaContainers.forEach(container => {
+    container.addEventListener('touchstart', function(e) {
+        // 只阻止单指操作，避免影响滚动
+        if (e.touches.length === 1) {
+            e.preventDefault();
+        }
+    }, { passive: false });
+    
+    container.addEventListener('touchend', function(e) {
+        e.preventDefault();
+    }, { passive: false });
 });
 
 // 初始化视频控件
