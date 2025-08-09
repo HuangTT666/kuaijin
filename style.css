@@ -609,6 +609,101 @@ footer {
     font-size: 0.9rem;
 }
 
+/* 音乐播放器样式 */
+.music-player {
+    position: absolute;
+    bottom: 50px;
+    right: 50px;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.record {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #333 25%, transparent 25%, transparent 75%, #333 75%, #333),
+                linear-gradient(45deg, #333 25%, transparent 25%, transparent 75%, #333 75%, #333);
+    background-size: 100px 100px;
+    background-position: 0 0, 50px 50px;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease;
+    animation: spin 2s linear infinite;
+}
+
+/* 转盘旋转动画 */
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* 暂停时停止旋转 */
+.record.paused {
+    animation-play-state: paused;
+}
+
+.record-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+}
+
+.record-hole {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #333;
+}
+
+.music-controls {
+    display: flex;
+    gap: 15px;
+}
+
+.control-btn {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255,255,255,0.8);
+    color: var(--primary);
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+}
+
+.control-btn:hover {
+    background: white;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.current-song {
+    background: rgba(0,0,0,0.5);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    backdrop-filter: blur(5px);
+}
+
 /* ============================== */
 /* 手机端适配 - 仅通过媒体查询实现 */
 /* ============================== */
@@ -664,6 +759,34 @@ footer {
     
     .carousel-item img {
         height: 300px;
+    }
+    
+    /* 音乐播放器响应式调整 */
+    .music-player {
+        bottom: 30px;
+        right: 20px;
+    }
+    
+    .record {
+        width: 100px;
+        height: 100px;
+        background-size: 70px 70px;
+    }
+    
+    .record-label {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .control-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+    
+    .current-song {
+        font-size: 0.8rem;
+        padding: 5px 12px;
     }
 }
 

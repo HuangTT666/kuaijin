@@ -58,14 +58,11 @@ document.addEventListener('DOMContentLoaded', function() {
     carouselItems.forEach(item => {
         const container = item.querySelector('.img-container');
         if (container && container.dataset.src) {
-            console.log('设置轮播图背景:', container.dataset.src); // 添加调试日志
             container.style.width = '100%';
             container.style.height = '100%';
             container.style.backgroundImage = `url(${container.dataset.src})`;
             container.style.backgroundSize = 'cover';
             container.style.backgroundPosition = 'center';
-        } else {
-            console.log('未找到图片容器或图片路径'); // 添加调试日志
         }
     });
 
@@ -140,7 +137,6 @@ document.addEventListener('DOMContentLoaded', function() {
     videos.forEach(video => {
         // 只处理视频播放/暂停，不阻止默认控件操作
         video.addEventListener('click', function(e) {
-            // 移除 e.preventDefault()，避免阻止控件点击
             if (this.paused) {
                 this.play();
             } else {
@@ -182,4 +178,87 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
+    // 背景音乐控制
+const bgMusic = document.getElementById('backgroundMusic');
+const songs = [
+    './music/蔡健雅 - 红色高跟鞋.mp3',
+    './music/蔡健雅 - Letting Go.mp3',
+    './music/陈柏宇 - 你瞒我瞒.mp3'
+];
+let currentSongIndex = 0;
+
+// 初始化播放第一首歌
+function initBackgroundMusic() {
+    if (bgMusic) {
+        bgMusic.src = songs[0];
+        // 尝试自动播放（受浏览器自动播放政策限制）
+        playMusic();
+    }
+}
+
+// 播放音乐的通用函数
+function playMusic() {
+    if (bgMusic) {
+        bgMusic.play().catch(e => {
+            console.log('播放失败，等待用户交互:', e);
+        });
+    }
+}
+
+// 播放下一首歌曲
+function playNextSong() {
+    currentSongIndex = (currentSongIndex + 1) % songs.length;
+    bgMusic.src = songs[currentSongIndex];
+    // 显示当前播放的歌曲名
+    showCurrentSong();
+    playMusic();
+}
+
+// 显示当前播放的歌曲名
+function showCurrentSong() {
+    const songName = songs[currentSongIndex].split('/').pop().replace('.mp3', '');
+    console.log('当前播放:', songName);
+    // 这里可以添加更新UI显示当前歌曲的逻辑
+}
+
+// 当一首歌曲结束时播放下一首
+if (bgMusic) {
+    bgMusic.addEventListener('ended', playNextSong);
+}
+
+// 视频播放状态监听（控制背景音乐）
+videos.forEach(video => {
+    // 视频播放时暂停背景音乐
+    video.addEventListener('play', function() {
+        if (bgMusic && !bgMusic.paused) {
+            bgMusic.pause();
+        }
+    });
+    
+    // 视频暂停时恢复背景音乐
+    video.addEventListener('pause', function() {
+        if (bgMusic && bgMusic.paused && !this.ended) {
+            playMusic();
+        }
+    });
+    
+    // 视频播放结束时恢复背景音乐
+    video.addEventListener('ended', function() {
+        if (bgMusic && bgMusic.paused) {
+            playMusic();
+        }
+    });
+});
+
+// 初始化背景音乐
+initBackgroundMusic();
+
+// 为了解决自动播放限制，添加页面交互触发音乐播放的机制
+document.addEventListener('click', function playOnInteraction() {
+    if (bgMusic && bgMusic.paused) {
+        playMusic();
+    }
+    // 只需要一次交互即可，移除事件监听
+    document.removeEventListener('click', playOnInteraction);
+});
 });
