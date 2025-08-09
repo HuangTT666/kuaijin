@@ -748,8 +748,15 @@ footer {
         font-size: 1.1rem;
     }
     
-    .carousel-item img {
-        height: 300px;
+    .carousel-item {
+        height: 300px; /* 降低高度，原300px可根据实际情况调整为250px */
+    }
+    .carousel-item img,
+    .carousel-item .img-container {
+        height: 100%; /* 确保图片高度与容器一致 */
+        background-size: cover; /* 保持图片比例，覆盖容器（可能裁剪边缘） */
+        /* 若希望完整显示图片而非裁剪，可改为：background-size: contain; background-repeat: no-repeat; */
+        background-position: center; /* 确保图片居中显示 */
     }
     
     /* 音乐播放器响应式调整 */
@@ -813,7 +820,16 @@ footer {
     
     /* 家庭成员 - 保持网格布局但单列显示 */
     .family-members {
-        grid-template-columns: 2fr;
+        grid-template-columns: 1fr;
+    }
+
+    .carousel-item {
+        height: 220px; /* 进一步降低手机端高度，适配小屏幕 */
+    }
+    .carousel-item img,
+    .carousel-item .img-container {
+        height: 100%;
+        background-position: center; /* 确保图片居中显示 */
     }
     
     
