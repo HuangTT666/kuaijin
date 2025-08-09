@@ -441,6 +441,50 @@ video {
     position: relative;
 }
 
+/* 添加自定义视频控件样式 */
+.custom-video-controls {
+    position: absolute; /* 相对于视频容器定位 */
+    bottom: 15px; /* 距离视频底部15px */
+    left: 15px; /* 距离视频左侧15px */
+    z-index: 2; /* 确保在视频上方显示 */
+}
+
+/* 可按需调整按钮样式（保持图标居中） */
+.play-pause-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(0,0,0,0.5);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.play-pause-btn:hover {
+    background: rgba(0,0,0,0.8);
+}
+
+.play-pause-btn i {
+    font-size: 1.2rem;
+}
+
+/* 视频悬停效果优化 */
+.video-player:hover .custom-video-controls {
+    opacity: 1;
+}
+
+/* 隐藏原生控件（如果有残留） */
+video::-webkit-media-controls {
+    display: none !important;
+}
+video {
+    -webkit-appearance: none;
+}
+
 /* 调整视频信息区域 */
 .video-info {
     padding: 20px;
@@ -613,7 +657,7 @@ footer {
 .music-player {
     position: absolute;
     bottom: 50px;
-    right: 50px;
+    left: 50px; /* 将right改为left */
     z-index: 5;
     display: flex;
     flex-direction: column;
@@ -634,8 +678,6 @@ footer {
     transition: transform 0.3s ease;
     animation: spin 2s linear infinite;
 }
-
-
 
 .record-label {
     position: absolute;
@@ -695,12 +737,8 @@ footer {
     backdrop-filter: blur(5px);
 }
 
-/* ============================== */
-/* 手机端适配 - 仅通过媒体查询实现 */
-/* ============================== */
-
+/* 手机端适配 */
 @media (max-width: 992px) {
-    /* 平板适配 */
     .hero h2 {
         font-size: 2.8rem;
     }
@@ -715,9 +753,6 @@ footer {
 }
 
 @media (max-width: 768px) {
-    /* 小平板和手机适配 */
-    
-    /* 头部导航 */
     .header-content {
         flex-direction: column;
         padding: 15px 0;
@@ -735,7 +770,6 @@ footer {
         padding: 6px 12px;
     }
     
-    /* 英雄区域 */
     .hero {
         height: 60vh;
     }
@@ -749,20 +783,18 @@ footer {
     }
     
     .carousel-item {
-        height: 300px; /* 降低高度，原300px可根据实际情况调整为250px */
+        height: 300px;
     }
     .carousel-item img,
     .carousel-item .img-container {
-        height: 100%; /* 确保图片高度与容器一致 */
-        background-size: cover; /* 保持图片比例，覆盖容器（可能裁剪边缘） */
-        /* 若希望完整显示图片而非裁剪，可改为：background-size: contain; background-repeat: no-repeat; */
-        background-position: center; /* 确保图片居中显示 */
+        height: 100%;
+        background-size: cover;
+        background-position: center;
     }
     
-    /* 音乐播放器响应式调整 */
     .music-player {
         bottom: 30px;
-        right: 20px;
+        left: 20px; /* 将right改为left */
     }
     
     .record {
@@ -789,9 +821,6 @@ footer {
 }
 
 @media (max-width: 480px) {
-    /* 手机适配 */
-    
-    /* 头部 */
     .logo h1 {
         font-size: 1.5rem;
     }
@@ -800,7 +829,6 @@ footer {
         font-size: 2rem;
     }
     
-    /* 英雄区域 */
     .hero {
         height: 50vh;
     }
@@ -809,7 +837,6 @@ footer {
         font-size: 1.8rem;
     }
     
-    /* 内容区域 */
     .section {
         padding: 50px 5%;
     }
@@ -818,22 +845,19 @@ footer {
         font-size: 1.8rem;
     }
     
-    /* 家庭成员 - 保持网格布局但单列显示 */
     .family-members {
         grid-template-columns: 1fr;
     }
 
     .carousel-item {
-        height: 220px; /* 进一步降低手机端高度，适配小屏幕 */
+        height: 220px;
     }
     .carousel-item img,
     .carousel-item .img-container {
         height: 100%;
-        background-position: center; /* 确保图片居中显示 */
+        background-position: center;
     }
     
-    
-    /* 照片网格 */
     .photos-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -842,7 +866,6 @@ footer {
         height: 180px;
     }
     
-    /* 视频区域 */
     .videos-container.three-column {
         flex-direction: column;
     }
@@ -864,7 +887,6 @@ footer {
         font-size: 1.4rem;
     }
     
-    /* 家乡区域 */
     .location-bg {
         height: 300px;
     }
@@ -877,7 +899,6 @@ footer {
         font-size: 1.2rem;
     }
     
-    /* 页脚 */
     .footer-links {
         flex-wrap: wrap;
         gap: 15px;

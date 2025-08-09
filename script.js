@@ -132,24 +132,57 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // 视频控制功能
-    const videos = document.querySelectorAll('video');
-    videos.forEach(video => {
-        // 只处理视频播放/暂停，不阻止默认控件操作
-        video.addEventListener('click', function(e) {
-            if (this.paused) {
-                this.play();
+    // 视频控制功能（自定义控件）
+    const initVideoControls = () => {
+        const videos = document.querySelectorAll('video');
+        const playPauseBtns = document.querySelectorAll('.play-pause-btn');
+        
+        // 为每个按钮添加点击事件
+        playPauseBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const videoId = this.getAttribute('data-video');
+                const video = document.getElementById(videoId);
+                if (video) {
+                    togglePlayPause(video, this);
+                }
+            });
+        });
+        
+        // 为视频本身添加点击播放/暂停
+        videos.forEach(video => {
+            video.addEventListener('click', function() {
+                const btn = document.querySelector(`.play-pause-btn[data-video="${this.id}"]`);
+                if (btn) {
+                    togglePlayPause(this, btn);
+                }
+            });
+            
+            // 视频结束时更新按钮状态
+            video.addEventListener('ended', function() {
+                const btn = document.querySelector(`.play-pause-btn[data-video="${this.id}"]`);
+                if (btn) {
+                    btn.innerHTML = '<i class="fas fa-play"></i>';
+                }
+            });
+            
+            // 保留右键禁用
+            video.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+                return false;
+            });
+        });
+        
+        // 播放/暂停切换函数
+        function togglePlayPause(video, btn) {
+            if (video.paused) {
+                video.play();
+                btn.innerHTML = '<i class="fas fa-pause"></i>';
             } else {
-                this.pause();
+                video.pause();
+                btn.innerHTML = '<i class="fas fa-play"></i>';
             }
-        });
-    
-        // 保留右键禁用
-        video.addEventListener('contextmenu', function(e) {
-            e.preventDefault();
-            return false;
-        });
-    });
+        }
+    };
     
     // 导航菜单激活状态
     const navLinks = document.querySelectorAll('nav a');
@@ -227,6 +260,7 @@ if (bgMusic) {
 }
 
 // 视频播放状态监听（控制背景音乐）
+const videos = document.querySelectorAll('video');
 videos.forEach(video => {
     // 视频播放时暂停背景音乐
     video.addEventListener('play', function() {
@@ -261,4 +295,7 @@ document.addEventListener('click', function playOnInteraction() {
     // 只需要一次交互即可，移除事件监听
     document.removeEventListener('click', playOnInteraction);
 });
+
+// 初始化视频控件
+initVideoControls();
 });
