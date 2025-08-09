@@ -635,16 +635,7 @@ footer {
     animation: spin 2s linear infinite;
 }
 
-/* 转盘旋转动画 */
-@keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
 
-/* 暂停时停止旋转 */
-.record.paused {
-    animation-play-state: paused;
-}
 
 .record-label {
     position: absolute;
@@ -822,13 +813,9 @@ footer {
     
     /* 家庭成员 - 保持网格布局但单列显示 */
     .family-members {
-        grid-template-columns: 1fr;
+        grid-template-columns: 2fr;
     }
     
-    /* 轮播图 */
-    .carousel-item img {
-        height: 250px;
-    }
     
     /* 照片网格 */
     .photos-grid {
@@ -850,7 +837,7 @@ footer {
     }
     
     .video-player {
-        height: 300px;
+        height: 500px;
     }
     
     .video-info {
