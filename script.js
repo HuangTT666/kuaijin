@@ -132,57 +132,68 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // 视频控制功能（自定义控件）
-    const initVideoControls = () => {
-        const videos = document.querySelectorAll('video');
-        const playPauseBtns = document.querySelectorAll('.play-pause-btn');
-        
-        // 为每个按钮添加点击事件
-        playPauseBtns.forEach(btn => {
-            btn.addEventListener('click', function() {
-                const videoId = this.getAttribute('data-video');
-                const video = document.getElementById(videoId);
-                if (video) {
-                    togglePlayPause(video, this);
-                }
-            });
+   // 修改视频控制功能（自定义控件）部分的代码
+const initVideoControls = () => {
+    const videos = document.querySelectorAll('video');
+    const playPauseBtns = document.querySelectorAll('.play-pause-btn');
+    
+    // 为每个按钮添加点击事件
+    playPauseBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const videoId = this.getAttribute('data-video');
+            const video = document.getElementById(videoId);
+            if (video) {
+                togglePlayPause(video, this);
+            }
+        });
+    });
+    
+    // 为视频本身添加点击播放/暂停
+    videos.forEach(video => {
+        video.addEventListener('click', function() {
+            const btn = document.querySelector(`.play-pause-btn[data-video="${this.id}"]`);
+            if (btn) {
+                togglePlayPause(this, btn);
+            }
         });
         
-        // 为视频本身添加点击播放/暂停
-        videos.forEach(video => {
-            video.addEventListener('click', function() {
-                const btn = document.querySelector(`.play-pause-btn[data-video="${this.id}"]`);
-                if (btn) {
-                    togglePlayPause(this, btn);
-                }
-            });
-            
-            // 视频结束时更新按钮状态
-            video.addEventListener('ended', function() {
-                const btn = document.querySelector(`.play-pause-btn[data-video="${this.id}"]`);
-                if (btn) {
-                    btn.innerHTML = '<i class="fas fa-play"></i>';
-                }
-            });
-            
-            // 保留右键禁用
-            video.addEventListener('contextmenu', function(e) {
-                e.preventDefault();
-                return false;
-            });
-        });
-        
-        // 播放/暂停切换函数
-        function togglePlayPause(video, btn) {
-            if (video.paused) {
-                video.play();
-                btn.innerHTML = '<i class="fas fa-pause"></i>';
-            } else {
-                video.pause();
+        // 视频结束时更新按钮状态
+        video.addEventListener('ended', function() {
+            const btn = document.querySelector(`.play-pause-btn[data-video="${this.id}"]`);
+            if (btn) {
                 btn.innerHTML = '<i class="fas fa-play"></i>';
             }
+        });
+        
+        // 保留右键禁用
+        video.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            return false;
+        });
+    });
+    
+    // 播放/暂停切换函数 - 添加了暂停其他视频的功能
+    function togglePlayPause(video, btn) {
+        // 如果要播放当前视频，先暂停所有其他视频
+        if (video.paused) {
+            videos.forEach(v => {
+                if (v !== video && !v.paused) {
+                    v.pause();
+                    const otherBtn = document.querySelector(`.play-pause-btn[data-video="${v.id}"]`);
+                    if (otherBtn) {
+                        otherBtn.innerHTML = '<i class="fas fa-play"></i>';
+                    }
+                }
+            });
+            
+            video.play();
+            btn.innerHTML = '<i class="fas fa-pause"></i>';
+        } else {
+            video.pause();
+            btn.innerHTML = '<i class="fas fa-play"></i>';
         }
-    };
+    }
+};
     
     // 导航菜单激活状态
     const navLinks = document.querySelectorAll('nav a');
